@@ -1,5 +1,5 @@
 import { BridgeClient, IPOSClientConfig } from "@maticnetwork/maticjs";
-import { StakeManager } from "./contracts";
+import { StakeManager, ValidatorShare } from "./contracts";
 
 export class StakingClient extends BridgeClient<IPOSClientConfig> {
     stakeManager: StakeManager;
@@ -11,5 +11,12 @@ export class StakingClient extends BridgeClient<IPOSClientConfig> {
             const stakeManagerProxyAddress = mainPlasmaContracts.StakeManagerProxy;
             this.stakeManager = new StakeManager(client, stakeManagerProxyAddress);
         })
+    }
+
+    validatorShare(address: string) {
+        return new ValidatorShare(
+            this.client,
+            address
+        )
     }
 }

@@ -14,7 +14,7 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
         );
     }
 
-    getMethod(name: string, ...args) {
+    protected getMethod(name: string, ...args) {
         return this.getContract().then(contract => {
             return contract.method(name, ...args);
         })
