@@ -1,0 +1,22 @@
+{
+  "name": "maticjs-staking",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maticnetwork/maticjs-staking.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maticnetwork/maticjs-staking/issues"
+  },
+  "homepage": "https://github.com/maticnetwork/maticjs-staking#readme",
+  "devDependencies": {
+    "@maticnetwork/maticjs": "^3.2.0"
+  }
+}
