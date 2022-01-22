@@ -17,44 +17,44 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
     protected getMethod(name: string, ...args) {
         return this.getContract().then(contract => {
             return contract.method(name, ...args);
-        })
+        });
     }
 
     getExchangeRate() {
         return this.getMethod("exchangeRate").then(method => {
             return this.processRead(method);
-        })
+        });
     }
 
     getOldUnbonds() {
         return this.getMethod("unbonds").then(method => {
             return this.processRead(method);
-        })
+        });
     }
 
     getNewUnbonds() {
         return this.getMethod("unbonds_new").then(method => {
             return this.processRead(method);
-        })
+        });
     }
 
 
     getLiquidRewards(address: string) {
         return this.getMethod("getLiquidRewards", address).then(method => {
             return this.processRead(method);
-        })
+        });
     }
 
     getMinAmountToStake() {
         return this.getMethod("minAmount").then(method => {
             return this.processRead(method);
-        })
+        });
     }
 
     getBalance() {
         return this.getMethod("balanceOf").then(method => {
             return this.processRead(method);
-        })
+        });
     }
 
     /**
@@ -74,7 +74,7 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
             Converter.toHex(minAmountToStake)
         ).then(method => {
             return this.processWrite(method);
-        })
+        });
     }
 
     /**
@@ -94,7 +94,7 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
             Converter.toHex(maximumSharesToBurn)
         ).then(method => {
             return this.processWrite(method);
-        })
+        });
     }
 
     /**
@@ -112,7 +112,7 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
             Converter.toHex(nonce),
         ).then(method => {
             return this.processWrite(method);
-        })
+        });
     }
 
     /**
@@ -126,7 +126,7 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
             "restake",
         ).then(method => {
             return this.processWrite(method);
-        })
+        });
     }
 
     /**
@@ -140,7 +140,7 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
             "withdrawRewards",
         ).then(method => {
             return this.processWrite(method);
-        })
+        });
     }
 
 

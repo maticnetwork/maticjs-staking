@@ -17,37 +17,37 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
     protected getMethod(name: string, ...args) {
         return this.getContract().then(contract => {
             return contract.method(name, ...args);
-        })
+        });
     }
 
     getCheckPointReward() {
         return this.getMethod("CHECKPOINT_REWARD").then(method => {
             return this.processRead(method);
-        })
+        });
     }
 
     getWithdrawalDelay() {
         return this.getMethod("WITHDRAWAL_DELAY").then(method => {
             return this.processRead(method);
-        })
+        });
     }
 
     getLockedStatus() {
         return this.getMethod("locked").then(method => {
             return this.processRead(method);
-        })
+        });
     }
 
     getValidatorDetails(validatorId) {
         return this.getMethod("validators", validatorId).then(method => {
             return this.processRead(method);
-        })
+        });
     }
 
     getMinHeimdallFee() {
         return this.getMethod("minHeimdallFee").then(method => {
             return this.processRead(method);
-        })
+        });
     }
 
 
@@ -88,7 +88,7 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
             Converter.toHex(validatorId)
         ).then(method => {
             return this.processWrite(method);
-        })
+        });
     }
 
     claimStakedAmount(validatorId) {
@@ -97,7 +97,7 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
             Converter.toHex(validatorId)
         ).then(method => {
             return this.processWrite(method);
-        })
+        });
     }
 
     reStake(validatorId, amount: TYPE_AMOUNT) {
@@ -107,7 +107,7 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
             Converter.toHex(amount)
         ).then(method => {
             return this.processWrite(method);
-        })
+        });
     }
 
     withdrawRewardForValidator(validatorId) {
@@ -116,7 +116,7 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
             Converter.toHex(validatorId)
         ).then(method => {
             return this.processWrite(method);
-        })
+        });
     }
 
     migrateDelegation(fromValidatorId, toValidatorId, amount: TYPE_AMOUNT) {
@@ -127,7 +127,7 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
             Converter.toHex(amount)
         ).then(method => {
             return this.processWrite(method);
-        })
+        });
     }
 
 }

@@ -20,7 +20,7 @@ export class MaticToken extends BaseToken<IPOSClientConfig> {
     protected getMethod(name: string, ...args) {
         return this.getContract().then(contract => {
             return contract.method(name, ...args);
-        })
+        });
     }
 
     getAllowanceForStakingManager(userAddress: string) {
@@ -30,7 +30,7 @@ export class MaticToken extends BaseToken<IPOSClientConfig> {
             this.stakeManagerAddress
         ).then(method => {
             return this.processWrite(method);
-        })
+        });
     }
 
     approveMaxForStaking() {
@@ -40,7 +40,7 @@ export class MaticToken extends BaseToken<IPOSClientConfig> {
             MAX_AMOUNT
         ).then(method => {
             return this.processWrite(method);
-        })
+        });
     }
 
     getBalance(userAddress: string) {
@@ -49,6 +49,6 @@ export class MaticToken extends BaseToken<IPOSClientConfig> {
             userAddress,
         ).then(method => {
             return this.processRead(method);
-        })
+        });
     }
 }
