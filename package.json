@@ -1,6 +1,6 @@
 {
   "name": "@maticnetwork/maticjs-staking",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Library for interacting with polygon staking.",
   "main": "dist/npm.export.js",
   "types": "dist/ts/index.d.ts",
@@ -19,7 +19,8 @@
     "lint:fix": "tslint src/**/*.ts --fix",
     "test": "npm run build:pack && cd test && npm run install:lib:test",
     "test:ci": "npm run build:pack && cd test && npm run install:lib:test:ci",
-    "debug": "npm run build:pack && cd test && npm run install:lib:debug"
+    "debug": "cd test && npm run install:lib:debug",
+    "build:debug": "npm run build:pack && npm run debug"
   },
   "repository": {
     "type": "git",

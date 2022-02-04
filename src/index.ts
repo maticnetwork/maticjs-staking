@@ -7,7 +7,7 @@ export class StakingClient extends BridgeClient<IPOSClientConfig> {
 
     init(config: IPOSClientConfig) {
         const client = this.client;
-        client.init(config).then(_ => {
+        return client.init(config).then(_ => {
             const mainPlasmaContracts = client.mainPlasmaContracts;
             const stakeManagerProxyAddress = mainPlasmaContracts.StakeManagerProxy;
             const maticTokenAddress = mainPlasmaContracts.Tokens.MaticToken;

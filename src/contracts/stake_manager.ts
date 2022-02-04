@@ -46,7 +46,7 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
 
     getMinHeimdallFee() {
         return this.getMethod("minHeimdallFee").then(method => {
-            return this.processRead(method);
+            return this.processRead<string>(method);
         });
     }
 
