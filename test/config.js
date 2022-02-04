@@ -8,7 +8,7 @@ module.exports = {
         parent: process.env.ROOT_RPC,
         child: process.env.MATIC_RPC || 'https://rpc-mumbai.matic.today',
     },
-    validatorAddress: '0xebbb19abc31fd51442b5717feeb5afabef5800e1',
+    validatorAddress: '0x1a9155Ead92CD339E3AE789fD3a5dC60ae268634',
     user1: {
         "privateKey": process.env.USER1_PRIVATE_KEY,
         "address": process.env.USER1_FROM

@@ -5,7 +5,7 @@ const { setProofApi, POSClient, use, service } = require("@maticnetwork/maticjs"
 const { Web3ClientPlugin } = require("@maticnetwork/maticjs-web3");
 
 const HDWalletProvider = require("@truffle/hdwallet-provider");
-const { user1, rpc, pos, user2 } = require("./config");
+const { user1, rpc, pos, user2, validatorAddress } = require("./config");
 use(Web3ClientPlugin);
 const from = user1.address;
 const privateKey = user1.privateKey;
@@ -30,7 +30,7 @@ const execute = async () => {
     });
     console.log("init called");
 
-    const minHeimdallFee = await client.stakeManager.getMinHeimdallFee();
+    const minHeimdallFee = await client.validatorShare(validatorAddress).getNewUnbonds(from);
     return console.log(minHeimdallFee)
 };
 

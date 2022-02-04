@@ -51,8 +51,14 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
         });
     }
 
-    getBalance() {
-        return this.getMethod("balanceOf").then(method => {
+    /**
+     * return balance of shares of delegator
+     *
+     * @return {*} 
+     * @memberof ValidatorShare
+     */
+    getBalance(address: string) {
+        return this.getMethod("balanceOf", address).then(method => {
             return this.processRead(method);
         });
     }
