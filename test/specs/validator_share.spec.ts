@@ -22,4 +22,20 @@ describe('validatorShare', () => {
         expect(fee).to.be.an('string')
         expect(Number(fee)).gte(0);
     })
+
+    it('getLiquidRewards', async () => {
+        const fee = await validatorShare.getLiquidRewards(from);
+        expect(fee).to.be.an('string')
+        expect(Number(fee)).gte(0);
+    })
+
+    it('getOldUnbonds', async () => {
+        const fee = await validatorShare.getOldUnbonds(from);
+        expect(fee).to.be.an('array')
+    })
+
+    it('getNewUnbonds', async () => {
+        const fee = await validatorShare.getNewUnbonds(from, 1);
+        expect(fee).to.be.an('array')
+    })
 });

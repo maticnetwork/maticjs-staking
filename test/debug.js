@@ -30,7 +30,7 @@ const execute = async () => {
     });
     console.log("init called");
 
-    const minHeimdallFee = await client.validatorShare(validatorAddress).getNewUnbonds(from);
+    const minHeimdallFee = await client.validatorShare(validatorAddress).getNewUnbonds(from, 1);
     return console.log(minHeimdallFee)
 };
 

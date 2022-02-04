@@ -26,14 +26,14 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
         });
     }
 
-    getOldUnbonds() {
-        return this.getMethod("unbonds").then(method => {
+    getOldUnbonds(address: string) {
+        return this.getMethod("unbonds", address).then(method => {
             return this.processRead(method);
         });
     }
 
-    getNewUnbonds() {
-        return this.getMethod("unbonds_new").then(method => {
+    getNewUnbonds(address: string, nonce) {
+        return this.getMethod("unbonds_new", address, nonce).then(method => {
             return this.processRead(method);
         });
     }
