@@ -1,4 +1,4 @@
-import { BaseToken, Converter, IPOSClientConfig, MAX_AMOUNT, TYPE_AMOUNT, Web3SideChainClient } from "@maticnetwork/maticjs";
+import { BaseToken, IPOSClientConfig, MAX_AMOUNT, Web3SideChainClient } from "@maticnetwork/maticjs";
 
 export class MaticToken extends BaseToken<IPOSClientConfig> {
 
@@ -9,7 +9,7 @@ export class MaticToken extends BaseToken<IPOSClientConfig> {
             {
                 isParent: true,
                 address: address,
-                name: "MaticToken",
+                name: "ERC20",
                 bridgeType: 'plasma'
             },
             client
@@ -29,11 +29,11 @@ export class MaticToken extends BaseToken<IPOSClientConfig> {
             userAddress,
             this.stakeManagerAddress
         ).then(method => {
-            return this.processWrite(method);
+            return this.processRead(method);
         });
     }
 
-    approveMaxForStaking() {
+    approveMaxForStakingManager() {
         return this.getMethod(
             "approve",
             this.stakeManagerAddress,
