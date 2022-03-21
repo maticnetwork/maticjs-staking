@@ -1,4 +1,4 @@
-import { BaseToken, IPOSClientConfig, MAX_AMOUNT, Web3SideChainClient } from "@maticnetwork/maticjs";
+import { BaseToken, IPOSClientConfig, ITransactionOption, MAX_AMOUNT, Web3SideChainClient } from "@maticnetwork/maticjs";
 
 export class MaticToken extends BaseToken<IPOSClientConfig> {
 
@@ -33,13 +33,13 @@ export class MaticToken extends BaseToken<IPOSClientConfig> {
         });
     }
 
-    approveMaxForStakingManager() {
+    approveMaxForStakingManager(option?: ITransactionOption) {
         return this.getMethod(
             "approve",
             this.stakeManagerAddress,
             MAX_AMOUNT
         ).then(method => {
-            return this.processWrite(method);
+            return this.processWrite(method, option);
         });
     }
 

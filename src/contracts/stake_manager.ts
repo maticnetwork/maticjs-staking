@@ -1,4 +1,4 @@
-import { BaseToken, Converter, IPOSClientConfig, TYPE_AMOUNT, Web3SideChainClient } from "@maticnetwork/maticjs";
+import { BaseToken, Converter, IPOSClientConfig, ITransactionOption, TYPE_AMOUNT, Web3SideChainClient } from "@maticnetwork/maticjs";
 
 export class StakeManager extends BaseToken<IPOSClientConfig> {
 
@@ -51,7 +51,7 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
     }
 
 
-    stakeFor(userAddress: string, amount: TYPE_AMOUNT, heimdallFee: TYPE_AMOUNT, acceptDelegation, signerPubkey) {
+    stakeFor(userAddress: string, amount: TYPE_AMOUNT, heimdallFee: TYPE_AMOUNT, acceptDelegation, signerPubkey, option?: ITransactionOption) {
         return this.getMethod(
             "stakeFor",
             Converter.toHex(userAddress),
@@ -60,7 +60,7 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
             acceptDelegation,
             signerPubkey
         ).then(method => {
-            return this.processWrite(method);
+            return this.processWrite(method, option);
         });
     }
 
@@ -72,61 +72,81 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
      * @return {*} 
      * @memberof StakeManager
      */
-    addTopUpForHeimdallFee(userAddress: string, amount: TYPE_AMOUNT) {
+    addTopUpForHeimdallFee(userAddress: string, amount: TYPE_AMOUNT, option?: ITransactionOption) {
         return this.getMethod(
             "topUpForFee",
             Converter.toHex(userAddress),
             Converter.toHex(amount),
         ).then(method => {
-            return this.processWrite(method);
+            return this.processWrite(method, option);
         });
     }
 
-    unStake(validatorId) {
+    unStake(validatorId, option?: ITransactionOption) {
         return this.getMethod(
             "unstake",
             Converter.toHex(validatorId)
         ).then(method => {
-            return this.processWrite(method);
+            return this.processWrite(method, option);
         });
     }
 
-    claimStakedAmount(validatorId) {
+    claimStakedAmount(validatorId, option?: ITransactionOption) {
         return this.getMethod(
             "unstakeClaim",
             Converter.toHex(validatorId)
         ).then(method => {
-            return this.processWrite(method);
+            return this.processWrite(method, option);
         });
     }
 
-    reStake(validatorId, amount: TYPE_AMOUNT) {
+    reStake(validatorId, amount: TYPE_AMOUNT, option?: ITransactionOption) {
         return this.getMethod(
             "restake",
             Converter.toHex(validatorId),
             Converter.toHex(amount)
         ).then(method => {
-            return this.processWrite(method);
+            return this.processWrite(method, option);
         });
     }
 
-    withdrawRewardForValidator(validatorId) {
+    withdrawRewardForValidator(validatorId, option?: ITransactionOption) {
         return this.getMethod(
             "withdrawRewards",
             Converter.toHex(validatorId)
         ).then(method => {
-            return this.processWrite(method);
+            return this.processWrite(method, option);
         });
     }
 
-    migrateDelegation(fromValidatorId, toValidatorId, amount: TYPE_AMOUNT) {
+    migrateDelegation(fromValidatorId, toValidatorId, amount: TYPE_AMOUNT, option?: ITransactionOption) {
         return this.getMethod(
             "migrateDelegation",
             Converter.toHex(fromValidatorId),
             Converter.toHex(toValidatorId),
             Converter.toHex(amount)
         ).then(method => {
-            return this.processWrite(method);
+            return this.processWrite(method, option);
+        });
+    }
+
+    updateCommissionRate(validatorId: TYPE_AMOUNT, validatorCommission: TYPE_AMOUNT, option?: ITransactionOption) {
+        return this.getMethod(
+            "updateCommissionRate",
+            Converter.toHex(validatorId),
+            Converter.toHex(validatorCommission),
+        ).then(method => {
+            return this.processWrite(method, option);
+        });
+    }
+
+    updateSigner(validatorId: TYPE_AMOUNT, publicKey: string, option?: ITransactionOption) {
+        return this.getMethod(
+            "updateSigner",
+            Converter.toHex(validatorId),
+            publicKey,
+        ).then(method => {
+            return this.processWrite(method, option);
         });
     }
 

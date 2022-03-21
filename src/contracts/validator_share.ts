@@ -1,4 +1,4 @@
-import { BaseToken, Converter, IPOSClientConfig, TYPE_AMOUNT, Web3SideChainClient } from "@maticnetwork/maticjs";
+import { BaseToken, Converter, IPOSClientConfig, ITransactionOption, TYPE_AMOUNT, Web3SideChainClient } from "@maticnetwork/maticjs";
 
 export class ValidatorShare extends BaseToken<IPOSClientConfig> {
 
@@ -73,13 +73,13 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
      * @return {*} 
      * @memberof ValidatorShare
      */
-    delegateAmount(amount: TYPE_AMOUNT, minAmountToStake: TYPE_AMOUNT) {
+    delegateAmount(amount: TYPE_AMOUNT, minAmountToStake: TYPE_AMOUNT, option?: ITransactionOption) {
         return this.getMethod(
             "buyVoucher",
             Converter.toHex(amount),
             Converter.toHex(minAmountToStake)
         ).then(method => {
-            return this.processWrite(method);
+            return this.processWrite(method, option);
         });
     }
 
@@ -93,13 +93,13 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
      * @return {*} 
      * @memberof ValidatorShare
      */
-    removeDelegatedAmount(amount: TYPE_AMOUNT, maximumSharesToBurn: TYPE_AMOUNT) {
+    removeDelegatedAmount(amount: TYPE_AMOUNT, maximumSharesToBurn: TYPE_AMOUNT, option?: ITransactionOption) {
         return this.getMethod(
             "sellVoucher_new",
             Converter.toHex(amount),
             Converter.toHex(maximumSharesToBurn)
         ).then(method => {
-            return this.processWrite(method);
+            return this.processWrite(method, option);
         });
     }
 
@@ -112,12 +112,12 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
      * @return {*} 
      * @memberof ValidatorShare
      */
-    claimDelegatedAmount(nonce: TYPE_AMOUNT) {
+    claimDelegatedAmount(nonce: TYPE_AMOUNT, option?: ITransactionOption) {
         return this.getMethod(
             "unstakeClaimTokens_new",
             Converter.toHex(nonce),
         ).then(method => {
-            return this.processWrite(method);
+            return this.processWrite(method, option);
         });
     }
 
@@ -127,11 +127,11 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
      * @return {*} 
      * @memberof ValidatorShare
      */
-    restakeReward() {
+    restakeReward(option?: ITransactionOption) {
         return this.getMethod(
             "restake",
         ).then(method => {
-            return this.processWrite(method);
+            return this.processWrite(method, option);
         });
     }
 
@@ -141,11 +141,11 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
      * @return {*} 
      * @memberof ValidatorShare
      */
-    withdrawRewards() {
+    withdrawRewards(option?: ITransactionOption) {
         return this.getMethod(
             "withdrawRewards",
         ).then(method => {
-            return this.processWrite(method);
+            return this.processWrite(method, option);
         });
     }
 
