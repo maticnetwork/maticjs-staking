@@ -9,6 +9,12 @@ describe('Staking manager', () => {
         expect(Number(fee)).gte(0);
     })
 
+    it('getMinDeposit', async () => {
+        const fee = await stakingClient.stakeManager.getMinDeposit();
+        expect(fee).to.be.an('string')
+        expect(Number(fee)).gte(0);
+    })
+
     it('getWithdrawalDelay', async () => {
         const fee = await stakingClient.stakeManager.getWithdrawalDelay();
         expect(fee).to.be.an('string')

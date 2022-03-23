@@ -50,6 +50,12 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
         });
     }
 
+    getMinDeposit() {
+        return this.getMethod("minDeposit").then(method => {
+            return this.processRead<string>(method);
+        });
+    }
+
 
     stakeFor(userAddress: string, amount: TYPE_AMOUNT, heimdallFee: TYPE_AMOUNT, acceptDelegation, signerPubkey, option?: ITransactionOption) {
         return this.getMethod(
