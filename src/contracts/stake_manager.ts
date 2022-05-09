@@ -106,11 +106,13 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
         });
     }
 
-    reStake(validatorId, amount: TYPE_AMOUNT, option?: ITransactionOption) {
+    reStake(validatorId, amount: TYPE_AMOUNT, validatorStake: Boolean,  option?: ITransactionOption) {
         return this.getMethod(
             "restake",
             Converter.toHex(validatorId),
-            Converter.toHex(amount)
+            Converter.toHex(amount), 
+            validatorStake
+
         ).then(method => {
             return this.processWrite(method, option);
         });
