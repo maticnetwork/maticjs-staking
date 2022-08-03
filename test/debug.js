@@ -30,6 +30,9 @@ const execute = async () => {
     });
     console.log("init called");
 
+    const value = await client.stakeManager.getTotalStake()
+    return console.log(value)
+
     const minHeimdallFee = await client.validatorShare(validatorAddress).getNewUnbonds(from, 1);
     return console.log(minHeimdallFee)
 };
