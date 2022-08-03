@@ -36,4 +36,10 @@ describe('Staking manager', () => {
         const result = await stakingClient.stakeManager.getValidatorDetails(100);
         expect(result).to.be.an('array')
     })
+
+    it('getTotalStake', async () => {
+        const fee = await stakingClient.stakeManager.getTotalStake();
+        expect(fee).to.be.an('string')
+        expect(Number(fee)).gte(0);
+    })
 });

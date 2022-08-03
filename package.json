@@ -1,6 +1,6 @@
 {
   "name": "@maticnetwork/maticjs-staking",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Library for interacting with polygon staking.",
   "main": "dist/npm.export.js",
   "types": "dist/ts/index.d.ts",
