@@ -84,6 +84,26 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
     }
 
     /**
+     * delegate amount to validator after converting it to POL
+     *
+     *  internally it calls method - **buyVoucherLegacy**
+     * 
+     * @param {TYPE_AMOUNT} amount
+     * @param {TYPE_AMOUNT} minAmountToStake
+     * @return {*} 
+     * @memberof ValidatorShare
+     */
+    delegateLegacyAmount(amount: TYPE_AMOUNT, minAmountToStake: TYPE_AMOUNT, option?: ITransactionOption) {
+        return this.getMethod(
+            "buyVoucherLegacy",
+            Converter.toHex(amount),
+            Converter.toHex(minAmountToStake)
+        ).then(method => {
+            return this.processWrite(method, option);
+        });
+    }
+
+    /**
      *  unstake delegated amount
      *
      * internally it calls - **sellVoucher_new**
