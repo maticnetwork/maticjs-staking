@@ -70,6 +70,19 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
         });
     }
 
+    stakeForPOL(userAddress: string, amount: TYPE_AMOUNT, heimdallFee: TYPE_AMOUNT, acceptDelegation, signerPubkey, option?: ITransactionOption) {
+        return this.getMethod(
+            "stakeForPOL",
+            Converter.toHex(userAddress),
+            Converter.toHex(amount),
+            Converter.toHex(heimdallFee),
+            acceptDelegation,
+            signerPubkey
+        ).then(method => {
+            return this.processWrite(method, option);
+        });
+    }
+
     /**
      * add fee to heimdall chain for doing transacion for validator
      *
@@ -97,9 +110,27 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
         });
     }
 
+    unstakePOL(validatorId, option?: ITransactionOption) {
+        return this.getMethod(
+            "unstakePOL",
+            Converter.toHex(validatorId)
+        ).then(method => {
+            return this.processWrite(method, option);
+        });
+    }
+
     claimStakedAmount(validatorId, option?: ITransactionOption) {
         return this.getMethod(
             "unstakeClaim",
+            Converter.toHex(validatorId)
+        ).then(method => {
+            return this.processWrite(method, option);
+        });
+    }
+
+    claimStakedAmountPOL(validatorId, option?: ITransactionOption) {
+        return this.getMethod(
+            "unstakeClaimPOL",
             Converter.toHex(validatorId)
         ).then(method => {
             return this.processWrite(method, option);
@@ -118,9 +149,30 @@ export class StakeManager extends BaseToken<IPOSClientConfig> {
         });
     }
 
+    reStakePOL(validatorId, amount: TYPE_AMOUNT, validatorStake: boolean, option?: ITransactionOption) {
+        return this.getMethod(
+            "restakePOL",
+            Converter.toHex(validatorId),
+            Converter.toHex(amount),
+            validatorStake
+
+        ).then(method => {
+            return this.processWrite(method, option);
+        });
+    }
+
     withdrawRewardForValidator(validatorId, option?: ITransactionOption) {
         return this.getMethod(
             "withdrawRewards",
+            Converter.toHex(validatorId)
+        ).then(method => {
+            return this.processWrite(method, option);
+        });
+    }
+
+    withdrawRewardForValidatorPOL(validatorId, option?: ITransactionOption) {
+        return this.getMethod(
+            "withdrawRewardsPOL",
             Converter.toHex(validatorId)
         ).then(method => {
             return this.processWrite(method, option);
