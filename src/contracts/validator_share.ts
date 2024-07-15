@@ -84,18 +84,18 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
     }
 
     /**
-     * delegate amount to validator after converting it to POL
+     * delegate amount to validator after converting POL to MATIC
      *
-     *  internally it calls method - **buyVoucherLegacy**
+     *  internally it calls method - **buyVoucherPOL**
      * 
      * @param {TYPE_AMOUNT} amount
      * @param {TYPE_AMOUNT} minAmountToStake
      * @return {*} 
      * @memberof ValidatorShare
      */
-    delegateLegacyAmount(amount: TYPE_AMOUNT, minAmountToStake: TYPE_AMOUNT, option?: ITransactionOption) {
+    delegateAmountPOL(amount: TYPE_AMOUNT, minAmountToStake: TYPE_AMOUNT, option?: ITransactionOption) {
         return this.getMethod(
-            "buyVoucherLegacy",
+            "buyVoucherPOL",
             Converter.toHex(amount),
             Converter.toHex(minAmountToStake)
         ).then(method => {
@@ -124,6 +124,26 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
     }
 
     /**
+     *  unstake delegated amount after converting POL to MATIC
+     *
+     * internally it calls - **sellVoucher_newPOL**
+     * 
+     * @param {TYPE_AMOUNT} amount
+     * @param {TYPE_AMOUNT} maximumSharesToBurn
+     * @return {*} 
+     * @memberof ValidatorShare
+     */
+    removeDelegatedAmountPOL(amount: TYPE_AMOUNT, maximumSharesToBurn: TYPE_AMOUNT, option?: ITransactionOption) {
+        return this.getMethod(
+            "sellVoucher_newPOL",
+            Converter.toHex(amount),
+            Converter.toHex(maximumSharesToBurn)
+        ).then(method => {
+            return this.processWrite(method, option);
+        });
+    }
+
+    /**
      * claim the delegated amount by supplying nonce
      *
      * internally it calls - **unstakeClaimTokens_new**
@@ -135,6 +155,24 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
     claimDelegatedAmount(nonce: TYPE_AMOUNT, option?: ITransactionOption) {
         return this.getMethod(
             "unstakeClaimTokens_new",
+            Converter.toHex(nonce),
+        ).then(method => {
+            return this.processWrite(method, option);
+        });
+    }
+
+    /**
+     * claim the delegated amount by supplying nonce after converting POL to MATIC
+     *
+     * internally it calls - **unstakeClaimTokens_newPOL**
+     * 
+     * @param {TYPE_AMOUNT} nonce
+     * @return {*} 
+     * @memberof ValidatorShare
+     */
+    claimDelegatedAmountPOL(nonce: TYPE_AMOUNT, option?: ITransactionOption) {
+        return this.getMethod(
+            "unstakeClaimTokens_newPOL",
             Converter.toHex(nonce),
         ).then(method => {
             return this.processWrite(method, option);
@@ -156,6 +194,20 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
     }
 
     /**
+     * restake the earned rewards after converting POL to MATIC
+     *
+     * @return {*} 
+     * @memberof ValidatorShare
+     */
+    restakeRewardPOL(option?: ITransactionOption) {
+        return this.getMethod(
+            "restakePOL",
+        ).then(method => {
+            return this.processWrite(method, option);
+        });
+    }
+
+    /**
      * withdraw earned rewards
      *
      * @return {*} 
@@ -169,6 +221,19 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
         });
     }
 
+    /**
+     * withdraw earned rewards after converting POL to MATIC
+     *
+     * @return {*} 
+     * @memberof ValidatorShare
+     */
+    withdrawRewardsPOL(option?: ITransactionOption) {
+        return this.getMethod(
+            "withdrawRewardsPOL",
+        ).then(method => {
+            return this.processWrite(method, option);
+        });
+    }
 
 
 }
