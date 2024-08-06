@@ -1,20 +1,20 @@
 const { StakingClient } = require("@maticnetwork/maticjs-staking");
-const client = new StakingClient();
-
-const { setProofApi, POSClient, use, service } = require("@maticnetwork/maticjs");
+const { use } = require("@maticnetwork/maticjs");
 const { Web3ClientPlugin } = require("@maticnetwork/maticjs-web3");
+use(Web3ClientPlugin);
 
 const HDWalletProvider = require("@truffle/hdwallet-provider");
+
 const { user1, rpc, pos, user2, validatorAddress } = require("./config");
-use(Web3ClientPlugin);
 const from = user1.address;
 const privateKey = user1.privateKey;
-const execute = async () => {
 
+const execute = async () => {
+    const client = new StakingClient();
     await client.init({
         log: true,
         network: 'testnet',
-        version: 'mumbai',
+        version: 'amoy',
         parent: {
             provider: new HDWalletProvider(privateKey, rpc.parent),
             defaultConfig: {
@@ -43,4 +43,3 @@ execute().then(_ => {
     console.error(err);
     process.exit(0);
 })
-

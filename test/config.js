@@ -1,14 +1,14 @@
-// const dotenv = require('dotenv');
-// const path = require('path');
-// const env = dotenv.config({
-//     path: path.join(__dirname, '.env')
-// });
+const dotenv = require('dotenv');
+const path = require('path');
+const env = dotenv.config({
+    path: path.join(__dirname, '.env')
+});
 module.exports = {
     rpc: {
         parent: process.env.ROOT_RPC,
-        child: process.env.MATIC_RPC || 'https://rpc-mumbai.matic.today',
+        child: process.env.MATIC_RPC || 'https://rpc-amoy.polygon.technology',
     },
-    validatorAddress: '0x1a9155Ead92CD339E3AE789fD3a5dC60ae268634',
+    validatorAddress: '0x6169b708dA400bd5fd90a9ffA30114e61298D444',
     user1: {
         "privateKey": process.env.USER1_PRIVATE_KEY,
         "address": process.env.USER1_FROM
