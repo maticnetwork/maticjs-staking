@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/maticnetwork/maticjs-staking#readme",
   "peerDependencies": {
-    "@maticnetwork/maticjs": "^3.9.1"
+    "@maticnetwork/maticjs": "github:maticnetwork/matic.js#6b29a55595bac644244c14be3112d5464f99140c"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^12.0.2",
