@@ -104,6 +104,43 @@ export class ValidatorShare extends BaseToken<IPOSClientConfig> {
     }
 
     /**
+     * delegate amount to validator using permit (POL token only)
+     *
+     * internally it calls method - **buyVoucherWithPermit**
+     *
+     * @param {TYPE_AMOUNT} amount Amount to delegate
+     * @param {TYPE_AMOUNT} minAmountToStake Minimum shares expected to mint
+     * @param {number} deadline Permit signature deadline
+     * @param {number} v Part of the signature
+     * @param {string} r Part of the signature
+     * @param {string} s Part of the signature
+     * @param {ITransactionOption} [option] Optional transaction parameters
+     * @return {*} Transaction result
+     * @memberof ValidatorShare
+     */
+    delegateAmountPOLwithPermit(
+        amount: TYPE_AMOUNT,
+        minAmountToStake: TYPE_AMOUNT,
+        deadline: number,
+        v: number,
+        r: string,
+        s: string,
+        option?: ITransactionOption
+    ) {
+        return this.getMethod(
+            "buyVoucherWithPermit",
+            Converter.toHex(amount),
+            Converter.toHex(minAmountToStake),
+            deadline,
+            v,
+            r,
+            s
+        ).then(method => {
+            return this.processWrite(method, option);
+        });
+    }
+
+    /**
      *  unstake delegated amount
      *
      * internally it calls - **sellVoucher_new**
